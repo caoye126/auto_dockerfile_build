@@ -1,7 +1,7 @@
-#Ñ¡Ôñ¾µÏñ
+#é€‰æ‹©é•œåƒ
 FROM php:5.6.36-fpm-stretch
 
-#ÒòÎª¹Ù·½¾µÏñÊÇÓÃµÄdebain stretch ËùÒÔµÚÒ»²½ÏÈÌæ»»Ô´ Èç¹ûÊÇJessie ÒªÌæ»»¶ÔÓ¦µÄÔ´
+#å› ä¸ºå®˜æ–¹é•œåƒæ˜¯ç”¨çš„debain stretch æ‰€ä»¥ç¬¬ä¸€æ­¥å…ˆæ›¿æ¢æº å¦‚æœæ˜¯Jessie è¦æ›¿æ¢å¯¹åº”çš„æº
 RUN echo "deb http://mirrors.aliyun.com/debian stretch main contrib non-free" > /etc/apt/sources.list && \
     echo "deb-src http://mirrors.aliyun.com/debian stretch main contrib non-free" >> /etc/apt/sources.list  && \
     echo "deb http://mirrors.aliyun.com/debian stretch-updates main contrib non-free" >> /etc/apt/sources.list && \
@@ -9,12 +9,12 @@ RUN echo "deb http://mirrors.aliyun.com/debian stretch main contrib non-free" > 
     echo "deb http://mirrors.aliyun.com/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb-src http://mirrors.aliyun.com/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.lis
 
-#°²×°ºóÃæËùÊ¹ÓÃµÄ¹¤¾ß composer»áÓÃµ½git php gdÀ©Õ¹»áÓÃµ½libpng-dev
+#å®‰è£…åé¢æ‰€ä½¿ç”¨çš„å·¥å…· composerä¼šç”¨åˆ°git php gdæ‰©å±•ä¼šç”¨åˆ°libpng-dev
 RUN apt-get update && apt-get install -y \
     git\
     libpng-dev
 
-#Ìí¼ÓÀ©Õ¹µÄÆäÖĞÒ»ÖÖ·½Ê½ ¾ÍÊÇ°ÑÃüÁî×éºÏÔÚÁËÒ»Æğ
+#æ·»åŠ æ‰©å±•çš„å…¶ä¸­ä¸€ç§æ–¹å¼ å°±æ˜¯æŠŠå‘½ä»¤ç»„åˆåœ¨äº†ä¸€èµ·
 RUN curl -fsSL 'https://pecl.php.net//get/redis-4.0.2.tgz' -o redis-4.0.2.tar.gz \
     && tar -xvf redis-4.0.2.tar.gz \
     && rm redis-4.0.2.tar.gz \
@@ -25,9 +25,9 @@ RUN curl -fsSL 'https://pecl.php.net//get/redis-4.0.2.tgz' -o redis-4.0.2.tar.gz
         && make \
         && make install \
     ) \
-    && rm -r redis-4.0.2 \ #É¾³ıÊÇÎªÁË½ÚÔ¼¿Õ¼ä
-    && docker-php-ext-enable redis  
-#°²×°php±àÒëÊ±¹Ù·½Ã»ÓĞ°²×°µÄÀ©Õ¹,ÄÄ¸ö°æ±¾µÄphp¾µÏñ,¾ÍÏÂÔØÄÄ¸ö°æ±¾µÄÔ´Âë
+    && rm -r redis-4.0.2 \ #åˆ é™¤æ˜¯ä¸ºäº†èŠ‚çº¦ç©ºé—´
+    && docker-php-ext-enable redis
+#å®‰è£…phpç¼–è¯‘æ—¶å®˜æ–¹æ²¡æœ‰å®‰è£…çš„æ‰©å±•,å“ªä¸ªç‰ˆæœ¬çš„phpé•œåƒ,å°±ä¸‹è½½å“ªä¸ªç‰ˆæœ¬çš„æºç 
 RUN curl -fsSL 'http://ba1.php.net/get/php-5.6.36.tar.gz/from/this/mirror' -o php-5.6.36.tar.gz \
     && tar -xvf php-5.6.36.tar.gz \
     && rm php-5.6.36.tar.gz \
@@ -68,13 +68,13 @@ RUN curl -fsSL 'http://ba1.php.net/get/php-5.6.36.tar.gz/from/this/mirror' -o ph
     ) \
     && rm -r php-5.6.36 \
     && docker-php-ext-enable mysql pdo_mysql mysqli bcmath gd
-#°²×°composer ÎÒ¸öÈË¾õµÃÕâÑù·½±ãÊ¹ÓÃ
+#å®‰è£…composer æˆ‘ä¸ªäººè§‰å¾—è¿™æ ·æ–¹ä¾¿ä½¿ç”¨
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer && \
     composer self-update && \
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
-#ÃüÁî
+#å‘½ä»¤
 CMD ["php-fpm"]
 
