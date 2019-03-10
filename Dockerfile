@@ -28,7 +28,7 @@ RUN curl -fsSL 'https://pecl.php.net//get/redis-4.0.2.tgz' -o redis-4.0.2.tar.gz
     && rm -r redis-4.0.2 \
     && docker-php-ext-enable redis
 #安装php编译时官方没有安装的扩展,哪个版本的php镜像,就下载哪个版本的源码
-RUN curl -fsSL 'http://ba1.php.net/get/php-5.6.36.tar.gz/from/this/mirror' -o php-5.6.36.tar.gz \
+RUN curl -fsSL 'http://am1.php.net/distributions/php-5.6.36.tar.gz' -o php-5.6.36.tar.gz \
     && tar -xvf php-5.6.36.tar.gz \
     && rm php-5.6.36.tar.gz \
     && ( \
