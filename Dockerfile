@@ -25,7 +25,7 @@ RUN curl -fsSL 'https://pecl.php.net//get/redis-4.0.2.tgz' -o redis-4.0.2.tar.gz
         && make \
         && make install \
     ) \
-    && rm -r redis-4.0.2 \ #删除是为了节约空间
+    && rm -r redis-4.0.2 \
     && docker-php-ext-enable redis
 #安装php编译时官方没有安装的扩展,哪个版本的php镜像,就下载哪个版本的源码
 RUN curl -fsSL 'http://ba1.php.net/get/php-5.6.36.tar.gz/from/this/mirror' -o php-5.6.36.tar.gz \
@@ -77,4 +77,3 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
 #命令
 CMD ["php-fpm"]
-
